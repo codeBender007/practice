@@ -1,17 +1,46 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import App from './App.js'
+import { ChakraProvider, ColorModeScript, extendTheme } from '@chakra-ui/react'
+import { mode } from '@chakra-ui/theme-tools';
+import { BrowserRouter } from 'react-router-dom';
+import { RecoilRoot } from 'recoil';
+import { SocketContextProvider } from './context/SocketContext.jsx';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+const styles = {
+  global: (props) => ({
+    body: {
+      color: mode('gray.800', 'whiteAlpha.900')(props),
+      bg: mode('gray.100', '#101010')(props),
+    }
+  })
+};
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+const config = {
+  initialColorMode: "dark",
+  useSystemColorMode: true
+};
+
+const colors = {
+  gray: {
+    light: "#616161",
+    dark: "#1e1e1e"
+  }
+};
+
+const theme = extendTheme({ config, styles, colors })
+
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
+    <RecoilRoot>
+      <BrowserRouter>
+        <ChakraProvider theme={theme}>
+          <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+          <SocketContextProvider>
+            <App />
+          </SocketContextProvider>
+        </ChakraProvider>
+      </BrowserRouter>
+    </RecoilRoot>
+  </StrictMode>
+)
