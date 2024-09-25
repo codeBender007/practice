@@ -12,7 +12,7 @@ import UpdateProfilePage from "./pages/UpdateProfilePage"
 import CreatePost from "./components/CreatePost"
 import ChatPage from "./pages/ChatPage"
 
-const API_BASE_URL = 'https://mohdadnan.onrender.com'
+const API_BASE_URL = 'https://social-backend-6n19.onrender.com'
 
 function App() {
 
