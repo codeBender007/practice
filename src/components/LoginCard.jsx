@@ -53,7 +53,7 @@ export default function LoginCard() {
             if (!res.ok) {
                 const errorData = await res.json();
                 console.error("Error response data:", errorData);
-                showToast("Error", errorData.error || "Login failed", "error");
+                showToast("adnan Error", errorData.error || "Login failed", "error");
                 return;
             }
 
@@ -62,7 +62,7 @@ export default function LoginCard() {
             // Check if the data contains an error
             if (data.error) {
                 console.log("error" , data.error)
-                showToast("Error", data.error, "error");
+                showToast("pasha Error", data.error, "error");
                 return;
             }
 
@@ -71,7 +71,7 @@ export default function LoginCard() {
             setUser(data);
         } catch (err) {
             console.error("Login error:", err);
-            showToast("Error", err.message || "Login failed", "error");
+            showToast(" ameen Error", err.message || "Login failed", "error");
         }
         finally{
             setLoading(false);
